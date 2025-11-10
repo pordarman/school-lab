@@ -34,5 +34,4 @@ public class PatientListTest {
         System.out.println("All tests passed!");
         patientList.printList();
     }
-    
 }
