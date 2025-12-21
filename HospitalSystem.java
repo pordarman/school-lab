@@ -1,7 +1,9 @@
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HospitalSystem {
+
     public PatientList patientList;
     public TreatmentQueue priorityQueue;
     public TreatmentQueue normalQueue;
@@ -101,11 +103,11 @@ public class HospitalSystem {
         int mergedIndex = left;
         while (leftIndex < leftSize && rightIndex < rightSize) {
             if (leftList.get(leftIndex).severity >= rightList.get(rightIndex).severity) {
-            list.set(mergedIndex, leftList.get(leftIndex));
-            leftIndex++;
+                list.set(mergedIndex, leftList.get(leftIndex));
+                leftIndex++;
             } else {
-            list.set(mergedIndex, rightList.get(rightIndex));
-            rightIndex++;
+                list.set(mergedIndex, rightList.get(rightIndex));
+                rightIndex++;
             }
             mergedIndex++;
         }

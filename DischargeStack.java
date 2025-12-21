@@ -1,4 +1,6 @@
 public class DischargeStack {
+
+    // Create a Node class
     private static class Node {
         DischargeRecord record;
         Node next;
@@ -11,10 +13,6 @@ public class DischargeStack {
 
     private Node top;
 
-    public DischargeStack() {
-        this.top = null;
-    }
-
     public void push(DischargeRecord record) {
         Node newNode = new Node(record);
         newNode.next = top;
@@ -22,28 +20,24 @@ public class DischargeStack {
     }
 
     public DischargeRecord pop() {
-        if (top == null) {
-            return null;
-        }
 
-        // Declare a variable to hold the record to return and update the top pointer
+        // If the top is null, return null
+        if (top == null) return null;
+
+        // Pop the top record
         DischargeRecord record = top.record;
         top = top.next;
         return record;
     }
 
     public DischargeRecord peek() {
-        if (top == null) {
-            return null;
-        }
-     
-        return top.record;
+        return top == null ? null : top.record;
     }
 
     public void printStack() {
         Node current = top;
         while (current != null) {
-            System.out.println("Patient ID: " + current.record.patientId + ", Discharge Time: " + current.record.dischargeTime);
+            System.out.println("Patient ID: " + current.record.patientId + " | Discharge Time: " + current.record.dischargeTime);
             current = current.next;
         }
     }
