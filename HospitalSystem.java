@@ -60,19 +60,66 @@ public class HospitalSystem {
 
     public void printPatientsSortedBySeverity() {
         ArrayList<Patient> patientListForSorting = new ArrayList<>(patientMap.values());
-        for (int i = 0; i < patientListForSorting.size() - 1; i++) {
-            for (int j = 0; j < patientListForSorting.size() - 1 - i; j++) {
-                if (patientListForSorting.get(j).severity < patientListForSorting.get(j + 1).severity) {
-                    Patient tmp = patientListForSorting.get(j);
-                    patientListForSorting.set(j, patientListForSorting.get(j + 1));
-                    patientListForSorting.set(j + 1, tmp);
-                }
-            }
-        }
+
+        // Merge sort implementation
+        mergeSortBySeverity(patientListForSorting, 0, patientListForSorting.size() - 1);
 
         System.out.println("\nPatients sorted by severity (highest first):");
         for (Patient p : patientListForSorting) {
             System.out.println(p);
+        }
+    }
+
+    private void mergeSortBySeverity(ArrayList<Patient> list, int left, int right) {
+
+        // If left index is less than right index (more than one element)
+        if (left < right) {
+            int mid = (left + right) / 2;
+
+            // Recursively sort first and second halves
+            mergeSortBySeverity(list, left, mid);
+            mergeSortBySeverity(list, mid + 1, right);
+            merge(list, left, mid, right);
+        }
+    }
+
+    private void merge(ArrayList<Patient> list, int left, int mid, int right) {
+        int leftSize = mid - left + 1;
+        int rightSize = right - mid;
+
+        ArrayList<Patient> leftList = new ArrayList<>();
+        ArrayList<Patient> rightList = new ArrayList<>();
+
+        for (int idx = 0; idx < leftSize; idx++) {
+            leftList.add(list.get(left + idx));
+        }
+        for (int idx = 0; idx < rightSize; idx++) {
+            rightList.add(list.get(mid + 1 + idx));
+        }
+
+        int leftIndex = 0, rightIndex = 0;
+        int mergedIndex = left;
+        while (leftIndex < leftSize && rightIndex < rightSize) {
+            if (leftList.get(leftIndex).severity >= rightList.get(rightIndex).severity) {
+            list.set(mergedIndex, leftList.get(leftIndex));
+            leftIndex++;
+            } else {
+            list.set(mergedIndex, rightList.get(rightIndex));
+            rightIndex++;
+            }
+            mergedIndex++;
+        }
+
+        while (leftIndex < leftSize) {
+            list.set(mergedIndex, leftList.get(leftIndex));
+            leftIndex++;
+            mergedIndex++;
+        }
+
+        while (rightIndex < rightSize) {
+            list.set(mergedIndex, rightList.get(rightIndex));
+            rightIndex++;
+            mergedIndex++;
         }
     }
 }

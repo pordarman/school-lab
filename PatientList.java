@@ -10,6 +10,7 @@ public class PatientList {
     }
     
     private Node head;
+    private Node tail;
 
     public PatientList() {
         this.head = null;
@@ -19,14 +20,12 @@ public class PatientList {
         Node newNode = new Node(patient);
         if (head == null) {
             head = newNode;
+            tail = newNode;
             return;
         }
 
-        Node current = head;
-        while (current.next != null) {
-            current = current.next;
-        }
-        current.next = newNode;
+        tail.next = newNode;
+        tail = newNode;
     }
 
     public void removePatient(int id) {
@@ -34,24 +33,25 @@ public class PatientList {
             return;
         }
 
-        Node current = head;
-        Node previous = null;
-
-        while (current != null && current.patient.id != id) {
-            previous = current;
-            current = current.next;
-        }
-
-        // If patient not found
-        if (current == null) {
+        // If the patient to be removed is the head
+        if (head.patient.id == id) {
+            head = head.next;
+            if (head == null) {
+                tail = null;
+            }
             return;
         }
 
-        // If previous is null, we're removing the head
-        if (previous == null) {
-            head = current.next;
-        } else {
-            previous.next = current.next;
+        Node current = head;
+        while (current.next != null) {
+            if (current.next.patient.id == id) {
+                current.next = current.next.next;
+                if (current.next == null) {
+                    tail = current;
+                }
+                return;
+            }
+            current = current.next;
         }
     }
 

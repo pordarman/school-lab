@@ -10,4 +10,14 @@ public class Patient {
         this.severity = severity;
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", severity=" + severity +
+                ", age=" + age +
+                '}';
+    }
 }

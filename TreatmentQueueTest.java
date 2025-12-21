@@ -4,14 +4,14 @@ public class TreatmentQueueTest {
         TreatmentQueue queue = new TreatmentQueue();
 
         // Enqueue test
-        queue.enqueue(new TreatmentRequest(1));
-        queue.enqueue(new TreatmentRequest(2));
-        queue.enqueue(new TreatmentRequest(3));
-        queue.enqueue(new TreatmentRequest(4));
-        queue.enqueue(new TreatmentRequest(5));
-        queue.enqueue(new TreatmentRequest(6));
-        queue.enqueue(new TreatmentRequest(7));
-        queue.enqueue(new TreatmentRequest(8));
+        queue.enqueue(new TreatmentRequest(1, false));
+        queue.enqueue(new TreatmentRequest(2, false));
+        queue.enqueue(new TreatmentRequest(3, false));
+        queue.enqueue(new TreatmentRequest(4, false));
+        queue.enqueue(new TreatmentRequest(5, false));
+        queue.enqueue(new TreatmentRequest(6, false));
+        queue.enqueue(new TreatmentRequest(7, false));
+        queue.enqueue(new TreatmentRequest(8, false));
 
         // Dequeue test
         TreatmentRequest request = queue.dequeue();
