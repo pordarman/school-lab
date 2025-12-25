@@ -46,6 +46,10 @@ public class HospitalSystem {
         return patientMap.get(request.patientId);
     }
 
+    public void addDischargeRecord(DischargeRecord record) {
+        dischargeStack.push(record);
+    }
+
     public void printSystemState() {
         System.out.println("Current Patients in System:");
         patientList.printList();
@@ -92,6 +96,7 @@ public class HospitalSystem {
         ArrayList<Patient> leftList = new ArrayList<>();
         ArrayList<Patient> rightList = new ArrayList<>();
 
+        // Copy data to temp lists
         for (int idx = 0; idx < leftSize; idx++) {
             leftList.add(list.get(left + idx));
         }
@@ -102,6 +107,8 @@ public class HospitalSystem {
         int leftIndex = 0, rightIndex = 0;
         int mergedIndex = left;
         while (leftIndex < leftSize && rightIndex < rightSize) {
+
+            // If left patient's severity is greater than or equal to right patient's severity then take left patient else take right patient
             if (leftList.get(leftIndex).severity >= rightList.get(rightIndex).severity) {
                 list.set(mergedIndex, leftList.get(leftIndex));
                 leftIndex++;
@@ -112,12 +119,14 @@ public class HospitalSystem {
             mergedIndex++;
         }
 
+        // Copy remaining elements of leftList if any
         while (leftIndex < leftSize) {
             list.set(mergedIndex, leftList.get(leftIndex));
             leftIndex++;
             mergedIndex++;
         }
 
+        // Also copy remaining elements of rightList if any
         while (rightIndex < rightSize) {
             list.set(mergedIndex, rightList.get(rightIndex));
             rightIndex++;

@@ -26,8 +26,8 @@ public class HospitalSystemTest {
 
         // Add 2 discharge records to simulate prior discharges
         System.out.println("Adding discharge records to the system...");
-        system.dischargeStack.push(new DischargeRecord(9));
-        system.dischargeStack.push(new DischargeRecord(10));
+        system.addDischargeRecord(new DischargeRecord(9));
+        system.addDischargeRecord(new DischargeRecord(10));
         System.out.println("All discharge records added.");
         
         // Print initial system state
